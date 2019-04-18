@@ -1,0 +1,29 @@
+{% extends 'articles/base.html' %}
+{% load staticfiles %}
+{% block title %}{{ category.cat_name }}列表{% endblock %}
+{% block lbox %}
+
+    <div class="whitebg bloglist">
+      <h2 class="htitle">{{ category.cat_name }}列表</h2>
+      <ul>
+        <!--纯文字-->
+            {% if articles %}
+                 {% for article in articles %}
+                 <li>
+                  <h3 class="blogtitle"><a href="{% url 'article:info' article.ar_id %}" target="_blank">{{ article.title }}</a></h3>
+                  <p class="blogtext">
+                      {{ article.intro }}
+                  </p>
+                  <p class="bloginfo"><i class="avatar"><img src="images/avatar.jpg"></i><span>周军民</span><span>{{ article.create_time }}</span><span>【<a href="/">{{ article.cat_id.cat_name }}</a>】</span></p>
+                  <a href="{% url 'article:info' article.ar_id %}" class="viewmore">详情</a>
+                 </li>
+              {% endfor %}
+          {% else %}
+                 <p style="text-align: center">没有改分类相关的文章......</p>
+          {% endif %}
+
+      </ul>
+    </div>
+    <!--bloglist end-->
+  </div>
+    {% endblock %}

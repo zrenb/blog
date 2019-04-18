@@ -1,0 +1,23 @@
+{% extends 'articles/base.html' %}
+{% block title %}人生苦短 使用Python{% endblock %}
+{% block lbox %}
+
+    <div class="whitebg bloglist">
+      <h2 class="htitle">最新博文</h2>
+      <ul>
+        <!--纯文字-->
+          {% for article in articles %}
+             <li>
+              <h3 class="blogtitle"><a href="{% url 'article:info' article.ar_id %}" target="_blank">{{ article.title }}</a></h3>
+              <p class="blogtext">
+                  {{ article.intro }}
+              </p>
+              <p class="bloginfo"><i class="avatar"><img src="images/avatar.jpg"></i><span>周军民</span><span>{{ article.create_time }}</span><span>【<a href="/">{{ article.cat_id.cat_name }}</a>】</span></p>
+              <a href="{% url 'article:info' article.ar_id %}" class="viewmore">详情</a>
+             </li>
+          {% endfor %}
+      </ul>
+    </div>
+    <!--bloglist end-->
+  </div>
+    {% endblock %}
