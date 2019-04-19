@@ -71,3 +71,13 @@ class CatArticlesList(View):
             'categorys': categorys,
             'python_cats': python_cats
         })
+
+
+class AboutMe(View):
+    def get(self, request):
+        categorys = Category.objects.all().filter(parent=0, is_show=1)
+        python_cats = Category.objects.filter(parent__exact=1)
+        return render(request, 'articles/about.html',{
+            'categorys': categorys,
+            'python_cats': python_cats
+        })
