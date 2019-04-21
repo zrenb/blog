@@ -11,6 +11,16 @@
 <link href="{% static 'css/base.css' %}" rel="stylesheet">
 <link href="{% static 'css/m.css' %}" rel="stylesheet">
 {% block js %}{% endblock %}
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?aeb8c412ceebf9ae4affc0e9f9cf5ef3";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
 <script src="{% static 'js/jquery-1.8.3.min.js' %}" ></script>
 <script src="{% static 'js/comm.js' %}"></script>
 <!--[if lt IE 9]>
