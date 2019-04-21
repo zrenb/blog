@@ -1,3 +1,5 @@
+from pprint import pprint
+
 from django.shortcuts import render
 
 # Create your views here.
@@ -17,7 +19,8 @@ class IndexView(View):
         """
         categorys = Category.objects.all().filter(parent=0, is_show=1)
         python_cats = Category.objects.filter(parent__exact=1)
-        articles = Article.objects.all().filter(is_show=1).order_by('-ar_id')[0:10]
+        articles = Article.objects.all().values('ar_id', 'title', 'cat_id', 'intro', 'create_time',
+                                                'cat_id__cat_name').filter(is_show=1).order_by('-ar_id')[0:10]
         return render(request, 'articles/index.html', {
             'categorys': categorys,
             'articles': articles,
@@ -61,7 +64,9 @@ class Articles(View):
 
 class CatArticlesList(View):
     def get(self, request, cat_id):
-        articles = Article.objects.filter(cat_id=int(cat_id))
+        articles = Article.objects.values('ar_id', 'title', 'cat_id', 'intro', 'create_time',
+                                          'cat_id__cat_name').filter(
+            cat_id=int(cat_id))
         category = Category.objects.get(cat_id=int(cat_id))
         categorys = Category.objects.all().filter(parent=0, is_show=1)
         python_cats = Category.objects.filter(parent__exact=1)
@@ -77,7 +82,7 @@ class AboutMe(View):
     def get(self, request):
         categorys = Category.objects.all().filter(parent=0, is_show=1)
         python_cats = Category.objects.filter(parent__exact=1)
-        return render(request, 'articles/about.html',{
+        return render(request, 'articles/about.html', {
             'categorys': categorys,
             'python_cats': python_cats
         })
